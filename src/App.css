@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+p{
+  margin: 0;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+input[type="text"], input[type="password"] {
+  padding: 7px;
+  width: 25rem; 
+  font-size: 14px;
+}
+input[type="checkbox"]{
+  margin-right: 4px;
+  cursor: pointer;
+}
+input[type='submit'] {
+  cursor: pointer;
+  padding: 5px 11px;
+  background-color:darkgreen;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  width: 7rem;
+}
+input[type='radio'] {
+  cursor: pointer;
+}
+
+.login-header{
+  text-decoration: underline;
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.container.header{
+  padding: 7px;
+  background-color: black;
+  font-size: 30px;
+  color: white;
+}
+.form-control{
+  margin-top: 7px;
+}
+.add-form{
+  display: inline-block;
+  border: 2px solid black;
+  text-align: left;
+  margin-top: 1rem; 
+  padding: 2rem 2rem 2rem;
+}
+.error{
+  color: red;
+  text-decoration: underline;
+}
+footer {
+  display: block;
+  min-width: 100%;
+  margin: auto;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+footer hr{
+  width: 50%;
+  margin: auto;
+}
+
+.initiateDraftButton{
+  margin-top: 1rem;
+}
+
+.contracts-table{
+  margin-left: 7rem;
+  margin-right: 7rem;
+  padding: 1rem;
+  border: 2px solid black;
+}
+
+.tableButton{
+  margin-left: 3px;
+  margin-bottom: 3px;
+}
+
+.create-draft-form{
+  border: 2px solid green;
+  border-radius: 25px;
+  font-size: 18px;
+  text-align: left;
+  margin-left: 7rem;
+  margin-right: 7rem;
+  padding: 3rem;
+}
+
+.create-draft-buttons div{
+  margin: auto;
+}
+.create-draft-buttons div button{
+  margin:5px;
+}
+#pdfviewercontainer{
+  margin-left: 7rem;
+  margin-right: 7rem;
+  margin-top: 3rem;
+}
+.button-grp{
+  margin: 5px;
+}
+.button-grp button{
+  margin: 5px;
+}
+.edit-contract-form .form-control{
+  border: 1px solid black;
+  margin-top: 2rem;
+}
+.edit-contract-form .form-control h4{
+  text-decoration: underline;
+}
+.edit-contract-form .form-control label{
+  margin-left: 3px;
+  margin-bottom: 7px;
+}
+.edit-contract{
+  border: 1px solid black;
+}
+.jumbotron{
+  margin-top: 2rem;
+  padding-bottom: 7rem;
+}
+.jumbotron div input{
+  margin-right: 7px;
+  font-size: 19px;
+  padding: 3px;
+  width: 350px;
+}
+.jumbotron div{
+  margin-bottom: 4rem;
+}
+.jumbotron h3{
+ text-decoration: underline;
+}
