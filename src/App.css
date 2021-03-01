@@ -171,5 +171,8 @@ footer hr{
  text-decoration: underline;
 }
 #adobe-dc-view{
-  height: 700px;
+  height: 680px;
+}
+.status-text{
+  border: 2px solid yellow;
 }

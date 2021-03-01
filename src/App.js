@@ -25,7 +25,7 @@ function App() {
         <ProtectedRoute exact path="/dashboard" Component={Dashboard} isAuth={token} />
         <ProtectedRoute path="/viewcontract/:candidate/:contract" Component={Viewer} isAuth={token} />
         <ProtectedRoute path="/editcontract/:candidate/:contract" Component={EditContract} isAuth={token} candidate={false} />
-        <ProtectedRoute path="/signcontract/:candidate/:contract" Component={SignAuthorize} isAuth={token} />
+        <ProtectedRoute path="/signcontract" Component={SignAuthorize} isAuth={token} />
         <Footer />
         </div>
     </Router>

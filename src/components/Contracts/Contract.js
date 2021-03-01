@@ -58,7 +58,7 @@ const Contract = ({content, id, onDelete}) => {
     }
     const signContract = async(isCompany, id) => {
         if(isCompany){
-            window.open(`/signcontract/${newContent.candidateName}/${newContent.contractName}`, "_blank");
+            window.open(`/signcontract?candidate=${newContent.candidateName}&contract=${newContent.contractName}`, "_blank");
         }else{
             console.log("Sign clicked by candidate")
         }
@@ -70,7 +70,7 @@ const Contract = ({content, id, onDelete}) => {
             <td><Link to={`/viewcontract/${newContent.candidateName}/${newContent.contractName}`}>{newContent.contractName.toUpperCase()}</Link></td>
             <td>{newContent.company}</td>
             <td>{newContent.candidateName}</td>
-            <td>
+            <td className="status-text">
             <>
             {status===0 && "DRAFT"}
             {status===1 && "FINALIZED"}

@@ -1,18 +1,17 @@
 import React,{useState} from 'react';
-import {useHistory, useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Button from "../Elements/Button";
 import {serverURL} from "../../config";
 
 const SignAuthorize = () => {
-    const history = useHistory();
     const [errorMessage, setErrorMessage] = useState(null);
     // eslint-disable-next-line
     const [content, setContent] = useState("OAUTH IN PROGRESS...");
     const [showEmail, setShowEmail] = useState(true);
     const [email, setEmail]= useState('');
 
-    let {contract, candidate, code, api_access_point, web_access_point} = useParams();    
-
+    let {contract, candidate, code, api_access_point, web_access_point} = useLocation();    
+    console.log(contract, candidate, code, api_access_point, web_access_point);
     const callFunc = async () => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(! re.test(String(email).toLowerCase())){
@@ -30,8 +29,7 @@ const SignAuthorize = () => {
                 },
                 body: JSON.stringify({contract, candidate, email, code, api_access_point, web_access_point})
             }).then((data)=>data.json());
-            
-            console.log(redirectUrl);
+
             window.open(redirectUrl.data, "_self");  
 
         }else{
