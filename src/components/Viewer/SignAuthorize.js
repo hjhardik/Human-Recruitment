@@ -21,7 +21,7 @@ const SignAuthorize = () => {
         }
         setErrorMessage(null);
         setShowEmail(false);
-        if(code!==undefined && api_access_point!==undefined && web_access_point!==undefined){
+        if(code!==undefined || code!==null){
             console.log("redirecting ..")
             let redirectUrl = await fetch(`${serverURL}/signauth/redirect`, {
                 method: 'POST',
