@@ -10,11 +10,14 @@ const SignAuthorize = (props) => {
     const [showEmail, setShowEmail] = useState(true);
     const [email, setEmail]= useState('');
 
-    let {contract, candidate, code, api_access_point, web_access_point} = useLocation();
-    console.log(contract, candidate, code, api_access_point, web_access_point);
-    const query = new URLSearchParams(props.location.search);    
-    console.log(query.get('contract'))
-    
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const contract = params.get('contract');
+    const candidate = params.get('candidate');
+    const code = params.get('code');
+    const state = params.get('state');
+
+
     const callFunc = async () => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(! re.test(String(email).toLowerCase())){
@@ -23,14 +26,14 @@ const SignAuthorize = (props) => {
         }
         setErrorMessage(null);
         setShowEmail(false);
-        if(code!==undefined || code!==null){
+        if(code === null || code === undefined){
             let redirectUrl = await fetch(`${serverURL}/signauth/redirect`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({contract, candidate, email, code, api_access_point, web_access_point})
+                body: JSON.stringify({contract, candidate, email, code, state})
             }).then((data)=>data.json());
 
             window.open(redirectUrl.data, "_self");  
@@ -41,7 +44,7 @@ const SignAuthorize = (props) => {
             headers: {
             'Content-Type': 'application/json'
             },
-            body: JSON.stringify({contract, candidate, email, code, api_access_point, web_access_point})
+            body: JSON.stringify({contract, candidate, email, code, state})
         })
     } 
     }
