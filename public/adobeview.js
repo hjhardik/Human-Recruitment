@@ -30,7 +30,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
         
         var previewFilePromise = adobeDCView.previewFile(
         {
-            content:   {location : {url: `${serverURL}/${contractName}_${candidateName}`}},
+            content:   {location : {url: `${serverURL}/viewpdf/${contractName}_${candidateName}`}},
             metaData: {fileName : `${contractName}_${candidateName}.pdf`, id:`${contractName}_${candidateName}`}
         }, viewerConfig);
 
