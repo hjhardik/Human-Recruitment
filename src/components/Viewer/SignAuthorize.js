@@ -25,10 +25,12 @@ const SignAuthorize = () => {
             let redirectUrl = await fetch(`${serverURL}/signauth/redirect`, {
                 method: 'POST',
                 headers: {
+                    Accept: 'application/json',
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({contract, candidate, email, code, api_access_point, web_access_point})
-            });
+            }).then((data)=>data.json());
+            
             console.log(redirectUrl);
             window.open(redirectUrl.data, "_self");  
 
