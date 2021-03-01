@@ -26,7 +26,7 @@ const Viewer = () => {
             setDraftContent(newDraft);
           }
         }
-      },10000)
+      },4000)
     
     useEffect(() => {
         const firstScript = document.createElement('script');

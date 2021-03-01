@@ -25,7 +25,6 @@ const CreateDraft= ({user, company, addContract, toggle}) => {
     useEffect(()=> {    
         const fetchMembers = async () => { 
             let candidates = await fetchFunc({subRoute: "findCompanyMembers", sendData: {company}});   
-            console.log("candidates", candidates);
             if(candidates){
                 setMembers(candidates);
             }

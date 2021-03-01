@@ -16,7 +16,7 @@ const EditContract = (props) => {
     let draftData = "" //in case of direct approach to url
 
     const editSubmit = async() => {
-        setErrorMessage(null)
+        setErrorMessage("Submitting ...")
         let draftContent = await childRef.current.convertContentToHTML();
         const editStatus = await fetch(`${serverURL}/editcontract/`, {
                 method: 'POST',
@@ -49,7 +49,6 @@ const EditContract = (props) => {
                 },
                 body: JSON.stringify({candidate,contract, SP, EP, id})
               }).then((data)=> data.json())
-        console.log(editStatus);
         if(editStatus.success){
             history.goBack();
         }else{

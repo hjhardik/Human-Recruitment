@@ -13,7 +13,6 @@ import SignAuthorize from './components/Viewer/SignAuthorize';
 
 function App() {
   const {token, setToken} = UserToken();
-  console.log("token is", token);
   return (
     <Router>
         <Route exact path="/">

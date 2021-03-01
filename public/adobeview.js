@@ -101,7 +101,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
                 oldAnnos = oldAnnos.concat(result);
               }
             });
-        }, 20000);
+        }, 5000);
 
         /* API to register events listener */
         annotationManager.registerEventListener(
