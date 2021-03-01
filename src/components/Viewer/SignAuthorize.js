@@ -30,7 +30,7 @@ const SignAuthorize = () => {
                 body: JSON.stringify({contract, candidate, email, code, api_access_point, web_access_point})
             });
             console.log(redirectUrl);
-            window.open(redirectUrl.url);;  
+            window.open(redirectUrl.data, "_self");  
 
         }else{
         fetch(`${serverURL}/signauth/redirect`, {
