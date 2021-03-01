@@ -22,7 +22,6 @@ const SignAuthorize = () => {
         setErrorMessage(null);
         setShowEmail(false);
         if(code!==undefined || code!==null){
-            console.log("redirecting ..")
             let redirectUrl = await fetch(`${serverURL}/signauth/redirect`, {
                 method: 'POST',
                 headers: {
@@ -30,9 +29,8 @@ const SignAuthorize = () => {
                 },
                 body: JSON.stringify({contract, candidate, email, code, api_access_point, web_access_point})
             });
-            console.log(redirectUrl);
-            console.log(typeof(redirectUrl));
-            window.open(redirectUrl);     
+
+            window.open(redirectUrl.url);     
         }else{
         fetch(`${serverURL}/signauth/redirect`, {
             method: 'POST',
