@@ -60,7 +60,7 @@ const Contract = ({content, id, onDelete}) => {
         if(isCompany){
             window.open(`/signcontract?candidate=${newContent.candidateName}&contract=${newContent.contractName}`, "_blank");
         }else{
-            console.log("Sign clicked by candidate")
+            
         }
         // let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, status+1)
         // if(success.success) setStatus(status+1);
@@ -77,7 +77,8 @@ const Contract = ({content, id, onDelete}) => {
             {status===2 && "APPROVED BY CANDIDATE"}
             {status===3 && "APPROVED BY COMPANY"}
             {status===4 && "APPROVED"}
-            {status===5 && "SIGNED"}
+            {status===5 && "SIGNED BY COMPANY"}
+            {status===6 && "SIGNED"}
             </>
             </td>       
             <td>
@@ -85,13 +86,15 @@ const Contract = ({content, id, onDelete}) => {
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-dark" text="Edit" onClick={()=>editContract(id)}/>}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-primary" text="Finalize" onClick={()=> finalizeContract(id)}/>}
                 {localStorage.getItem('candidate')==="true" && status===1 && <Button class="tableButton btn btn-success" text="APPROVE BY CANDIDATE" onClick={()=> approveContract(false, id)}/>}
-                {localStorage.getItem('candidate')==="false" && status===1 && "Waiting for candidate to approve. Check comments/annotations in contract viewer."}
+                {localStorage.getItem('candidate')==="false" && status===1 && "Waiting for candidate to approve."}
                 {localStorage.getItem('candidate')==="false" && status===2 && <Button class="tableButton btn btn-success" text="APPROVE BY COMPANY" onClick={()=> approveContract(true, id)}/>}
-                {localStorage.getItem('candidate')==="true" && status===2 && "Waiting for company to approve. Check comments/annotations in contract viewer."}
-                {(status >= 2 && status <= 4) && localStorage.getItem('candidate')==="true" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(false, id) }/>}
+                {localStorage.getItem('candidate')==="true" && status===2 && "Waiting for company to approve."}
+                {(status >= 2 && status <= 5) && localStorage.getItem('candidate')==="true" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(false, id) }/>}
                 {(status === 3 || status === 4) && localStorage.getItem('candidate')==="false" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(true, id) }/>}
-                {localStorage.getItem('candidate')==="true" && status===4 && <Button class="tableButton btn btn-success" text="SIGN" onClick={()=> signContract(false, id)}/>} 
+                {localStorage.getItem('candidate')==="true" && status===4 && "Waiting for company to send signature link"} 
                 {localStorage.getItem('candidate')==="false" && status===4 && <Button class="tableButton btn btn-success" text="SIGN" onClick={()=> signContract(true, id)}/>} 
+                {localStorage.getItem('candidate')==="true" && status===5 && "Will contain signature link when API is verified"}
+                {status===6 && "CONTRACT ESTABLISHED."}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-danger" text="Delete" onClick={()=> deleteContract(newContent._id) }/>}
                 {status===6 && <Button text="CONTRACT ESTABLISHED" color="pink" />}
                 </>
