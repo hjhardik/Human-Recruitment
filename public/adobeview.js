@@ -1,6 +1,6 @@
 document.addEventListener("adobe_dc_view_sdk.ready", function()
     {   let serverURL = "https://guarded-garden-69104.herokuapp.com";
-        let embedClientId = "0380af08d146472fad73e31a5c5453f1";
+        let embedClientId = "6a952fd7f3da4312a6c38046216a5cfd";
 
         let viewDiv = document.getElementById("pdfviewercontainer");
         let contractName = viewDiv.getAttribute("contract");
