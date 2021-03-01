@@ -79,7 +79,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
             .then((response) => {
               return response.json();
             })
-            .then((res) => {
+            .then((res) => {    
               let updatedAnnos = [];
               res.forEach((r) => {
                 updatedAnnos.push(r.data);
@@ -101,7 +101,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
                 oldAnnos = oldAnnos.concat(result);
               }
             });
-        }, 5000);
+        }, 20000);
 
         /* API to register events listener */
         annotationManager.registerEventListener(

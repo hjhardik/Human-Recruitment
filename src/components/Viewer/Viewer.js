@@ -21,12 +21,12 @@ const Viewer = () => {
 
     setInterval(async () => {
         let newDraft = await findContent(candidate, contract);
-        if(newDraft !== null){
+        if(newDraft !== null || newDraft !== undefined){
           if(newDraft.localeCompare(draftContent) !== 0){
             setDraftContent(newDraft);
           }
         }
-      },4000)
+      },10000)
     
     useEffect(() => {
         const firstScript = document.createElement('script');
