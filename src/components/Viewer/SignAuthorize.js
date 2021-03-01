@@ -6,7 +6,7 @@ const SignAuthorize = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
     // eslint-disable-next-line
     const [content, setContent] = useState("OAUTH IN PROGRESS...");
-    const [showEmail, setShowEmail] = useState(false);
+    const [showEmail, setShowEmail] = useState(true);
     const [email, setEmail]= useState('');
 
     const search = window.location.search;
@@ -45,16 +45,11 @@ const SignAuthorize = (props) => {
             body: JSON.stringify({contract, candidate, email, code, state})
         }).then((data)=>data.json());
         if(res.success){
-
+            // AFTER API IS CERTIFIED. UPDATE STATUS OF THE CONTRACT TO '5'.
         }else{
             setErrorMessage(res.msg);
         }  
     } 
-    }
-    if(code === null || code === undefined){
-        callFunc();
-    }else{
-        setShowEmail(true);
     }
     
     return (
