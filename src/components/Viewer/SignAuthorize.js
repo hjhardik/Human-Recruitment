@@ -1,5 +1,4 @@
 import React,{useState} from 'react';
-import {useLocation} from "react-router-dom";
 import Button from "../Elements/Button";
 import {serverURL} from "../../config";
 
@@ -16,7 +15,6 @@ const SignAuthorize = (props) => {
     const candidate = params.get('candidate');
     const code = params.get('code');
     const state = params.get('state');
-
 
     const callFunc = async () => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -39,13 +37,15 @@ const SignAuthorize = (props) => {
             window.open(redirectUrl.data, "_self");  
 
         }else{
-        fetch(`${serverURL}/signauth/redirect`, {
+        let res = await fetch(`${serverURL}/signauth/redirect`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
             },
             body: JSON.stringify({contract, candidate, email, code, state})
-        })
+        }).then((data)=>data.json());
+
+        console.log(res)
     } 
     }
     
