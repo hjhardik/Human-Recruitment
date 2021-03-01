@@ -32,7 +32,7 @@ const Viewer = () => {
         firstScript.async = true;
         firstScript.type="text/javascript";
         const secondScript = document.createElement('script');
-        secondScript.src = "%PUBLIC_URL%/adobeview.js";
+        secondScript.src = "/adobeview.js";
         secondScript.async = true;
         secondScript.type="text/javascript";
         document.body.appendChild(firstScript);
