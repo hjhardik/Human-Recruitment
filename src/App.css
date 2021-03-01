@@ -170,3 +170,7 @@ footer hr{
 .jumbotron h3{
  text-decoration: underline;
 }
+#adobe-dc-view{
+  height: 700px;
+  width: 500px;
+}

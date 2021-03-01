@@ -5,9 +5,8 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
         let viewDiv = document.getElementById("pdfviewercontainer");
         let contractName = viewDiv.getAttribute("contract");
         let candidateName = viewDiv.getAttribute("candidate");
-        console.log(contractName, candidateName);
         const viewerConfig = {
-            defaultViewMode: "FIT_PAGE",  //default mode is set to fit_page
+            defaultViewMode: "FIT_WIDTH",  //default mode is set to fit_page
             embedMode: "FULL_WINDOW",     //display mode is set to inline
             showPageControls : true,  //display controls
             dockPageControls:true, //user can dock/undock
