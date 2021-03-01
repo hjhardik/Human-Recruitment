@@ -10,7 +10,9 @@ const Viewer = () => {
       let res = await fetch(`${serverURL}/finddraftcontent/`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              Accept: "application/json",
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
             },
             body: JSON.stringify({candidate, contract})
           }).then((data)=> data.json())   

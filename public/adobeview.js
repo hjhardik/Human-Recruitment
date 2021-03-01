@@ -71,7 +71,8 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
             method: "POST",
             headers: {
               Accept: "application/json",
-              "Content-Type": "application/json",
+              'Content-Type': "application/json",
+              'Access-Control-Allow-Origin': '*',
             },
             body: JSON.stringify({ fileId: `${contractName}_${candidateName}` }),
           })
@@ -100,7 +101,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
                 oldAnnos = oldAnnos.concat(result);
               }
             });
-        }, 2000);
+        }, 5000);
 
         /* API to register events listener */
         annotationManager.registerEventListener(
@@ -131,6 +132,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
                       headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
+                        'Access-Control-Allow-Origin': '*',
                       },
                       body: JSON.stringify({
                         data: event.data,
@@ -148,6 +150,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
                     headers: {
                       Accept: "application/json",
                       "Content-Type": "application/json",
+                      'Access-Control-Allow-Origin': '*',
                     },
                     body: JSON.stringify({ data: event.data, fileId: `${contractName}_${candidateName}` }),
                   });
@@ -161,6 +164,7 @@ document.addEventListener("adobe_dc_view_sdk.ready", function()
                     headers: {
                       Accept: "application/json",
                       "Content-Type": "application/json",
+                      'Access-Control-Allow-Origin': '*',
                     },
                     body: JSON.stringify({ data: event.data, fileId: `${contractName}_${candidateName}` }),
                   });
