@@ -1,3 +1,10 @@
+//handles the signing of PDF contract by company user
+// when company user clicks on sign contract, redirects to OAUTH by adobe account,
+// and then generates code and access/refresh tokens and then sends the document to be
+// signed through TRANSIENT DOCUMENT and generates an AGREEMENT, which later will be used 
+// to create a signing URL, which will then be sent to the candidate for signing
+// IMPORTANT** : SINCE MY API IS NOT CERTIFIED BY ADOBE, IT RESULTS IN 403 ERROR (ie. NOT ALLOWED)
+// WHILE CREATING AGREEMENT.
 import React,{useState} from 'react';
 import Button from "../Elements/Button";
 import {serverURL} from "../../config";
@@ -6,9 +13,11 @@ const SignAuthorize = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
     // eslint-disable-next-line
     const [content, setContent] = useState("OAUTH IN PROGRESS...");
+    // RECIPIENT EMAIL ADDRESS for sending contract through transient document 
     const [showEmail, setShowEmail] = useState(true);
     const [email, setEmail]= useState('');
 
+    // get the query string parameters
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const contract = params.get('contract');
@@ -45,7 +54,8 @@ const SignAuthorize = (props) => {
             body: JSON.stringify({contract, candidate, email, code, state})
         }).then((data)=>data.json());
         if(res.success){
-            // AFTER API IS CERTIFIED. UPDATE STATUS OF THE CONTRACT TO '5'.
+            // IF API IS CERTIFIED, UPDATE STATUS OF THE CONTRACT TO 'SIGNED BY COMPANY' and 
+            // GENERATE SIGNING URL AND SEND IT TO CANDIDATE 
         }else{
             setErrorMessage(res.msg);
         }  

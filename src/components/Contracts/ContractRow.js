@@ -1,3 +1,4 @@
+//contracts row
 import Contract from "./Contract";
 import React,{useState, useEffect} from "react";
 
@@ -8,12 +9,12 @@ const ContractRow = ({contracts, onDelete}) => {
         setNewContracts(contracts)
     }, [contracts]);
 
+    //loop through all the contracts 
     return( 
         <React.Fragment >
-        { newContracts.map((contract, idx) => (
+        {newContracts.map((contract, idx) => (
                 <Contract content={contract} key={idx} id={idx} onDelete={onDelete} />
-            ))
-        }
+        ))}
         </React.Fragment>   
     )
 }

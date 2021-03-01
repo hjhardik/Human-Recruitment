@@ -1,3 +1,4 @@
+//TEXT EDITOR COMPONENT : using React Draft-js and React-Draft-WYSIWYG
 import React, { useState} from 'react';
 import { EditorState, ContentState, convertFromHTML } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
@@ -22,11 +23,13 @@ const TextEditor = forwardRef((props, ref) => {
       }
     }
   );
-
+  
+  //handles editor change
   const handleEditorChange = (state) => {
     setEditorState(state);
   }
 
+  //use of useRef to call covertToHTML function
   useImperativeHandle(ref, () => ({
   async convertContentToHTML() {
     let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());

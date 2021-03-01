@@ -1,3 +1,5 @@
+// handles editing of contract 
+// company user can change the input, delete contract pages, reorder pages etc.
 import Button from "../Elements/Button"
 import TextEditor from "../Elements/TextEditor";
 import {useHistory, useParams, useLocation} from "react-router-dom";
@@ -15,6 +17,7 @@ const EditContract = (props) => {
     let {state} = useLocation();
     let draftData = "" //in case of direct approach to url
 
+    //update the PDF contract content
     const editSubmit = async() => {
         setErrorMessage("Submitting ...")
         let draftContent = await childRef.current.convertContentToHTML();
@@ -32,9 +35,13 @@ const EditContract = (props) => {
         }      
     }
 
+    // reorder or delete pages from the contract
     const reorderDeleteSubmit = async (id) =>{
         setErrorMessage(null);
+        //starting page number, ending page number
         let SP, EP;
+        //id=0: DELETION
+        //ID=1: REORDER
         if(id===0){
             SP = document.getElementById("deleteSP").value;
             EP = document.getElementById("deleteEP").value;
@@ -56,6 +63,7 @@ const EditContract = (props) => {
         }      
     }
 
+    // BACK TO DASHBOARD
     const cancelHandler = () => {
         setErrorMessage(null);
         history.goBack();

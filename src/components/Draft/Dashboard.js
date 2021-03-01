@@ -1,3 +1,4 @@
+//DASHBOARD COMPONENT
 import Button from "../Elements/Button";
 import {useEffect, useState} from "react";
 import ContractRow from "../Contracts/ContractRow";
@@ -24,6 +25,7 @@ const Dashboard = () => {
     user = localStorage.getItem('user')
     company = localStorage.getItem('company')
 
+    //GET ALL THE RELATED CONTRACTS
     useEffect(() => {
         const getTasks = async () => {
             let contractsFromServer = await fetchContracts(localStorage.getItem('user'), localStorage.getItem('company'), localStorage.getItem('candidate'))
@@ -41,6 +43,7 @@ const Dashboard = () => {
         toggleShowCreateDraft(true)
     }
 
+    //IN CASE NEW CONTRACT IS ADDED
     //newContracts is an array of contract objects
     const addContract = (newContracts) => {
         console.log("contracts:", contracts)
@@ -48,7 +51,7 @@ const Dashboard = () => {
         if(contracts !== null) setContracts([...newContracts, ...contracts])
         else setContracts([...newContracts])
     }
-    
+    // IN CASE ANY DRAFT CONTRACT IS DELETED
     const deleteContract = (id) => {
         console.log("id deletion called on", id);
         setContracts(contracts.filter((contract) => contract._id !== id))

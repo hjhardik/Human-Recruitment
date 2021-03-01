@@ -1,3 +1,4 @@
+// handles the contract(PDF) viewer
 import React,{useEffect, useState} from 'react'
 import {useParams} from "react-router-dom";
 import {serverURL} from "../../config";
@@ -6,6 +7,7 @@ const Viewer = () => {
     let {candidate, contract} = useParams();
     const [draftContent, setDraftContent] = useState("");
 
+    //findContent function helps to determine when the content of the contract is changed
     const findContent = async () => {
       let res = await fetch(`${serverURL}/finddraftcontent/`, {
             method: 'POST',
@@ -19,6 +21,8 @@ const Viewer = () => {
       return res.content
     }
 
+    // Checks after every three seconds, if the content of contract PDF is changed
+    // if changed, it automatically re renders the PDF so that new changes can be viewed seamlessly
     setInterval(async () => {
         let newDraft = await findContent(candidate, contract);
         if(newDraft !== null || newDraft !== undefined){
@@ -26,8 +30,9 @@ const Viewer = () => {
             setDraftContent(newDraft);
           }
         }
-      },4000)
+      }, 3000)
     
+    // attach external JS file for PDF view  
     useEffect(() => {
         const firstScript = document.createElement('script');
         firstScript.src = "https://documentcloud.adobe.com/view-sdk/main.js";

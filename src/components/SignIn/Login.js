@@ -1,7 +1,9 @@
+// LOGIN PAGE
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {serverURL} from "../../config";
 
+// function for sending credentials to the server
 async function loginUser(credentials) {
   return await fetch(`${serverURL}/login`, {
     method: 'POST',
@@ -21,6 +23,7 @@ const Login = ({setToken}) => {
     const [candidate, setCandidate] = useState(true)
     const [company, setCompany] = useState(false)
 
+  //on selecting role (candidate or comapany)  
   const onRoleChangeCan = (e) => {
     if (errorMessage){
       setErrorMessage(null)
@@ -40,6 +43,7 @@ const Login = ({setToken}) => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
+    // validation 
     if (!userName || !password) {
       setErrorMessage(('Please fill out all fields'));
         return

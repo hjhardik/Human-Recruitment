@@ -1,9 +1,11 @@
+//CREATE NEW DRAFT
 import React, {useState, useEffect} from "react";
 import Button from "../Elements/Button";
 import TextEditor from "../Elements/TextEditor";
 import {serverURL} from "../../config";
 const { useRef} = React;
 
+//create a common function to handle the server calls
 const fetchFunc = async ({subRoute, sendData}) => {
     return await fetch(`${serverURL}/${subRoute}`, {
         method: 'POST',
@@ -16,12 +18,15 @@ const fetchFunc = async ({subRoute, sendData}) => {
 }
 
 const CreateDraft= ({user, company, addContract, toggle}) => {
+    //using ref to call child components method
     const childRef = useRef();
     const [errorMessage, setErrorMessage] = useState('');
     const [members, setMembers] = useState([]);
     const [contractName, setContractName] = useState('');
     const [selectedMembers, setSelectedMembers] = useState([])
 
+    //find and list all the members of the company so that company user can 
+    //select which candidates to include in a contract
     useEffect(()=> {    
         const fetchMembers = async () => { 
             let candidates = await fetchFunc({subRoute: "findCompanyMembers", sendData: {company}});   
@@ -35,6 +40,7 @@ const CreateDraft= ({user, company, addContract, toggle}) => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        // validation
         if(members.length ===0){
             setErrorMessage("There are no candidates from your company");
             return
@@ -70,6 +76,7 @@ const CreateDraft= ({user, company, addContract, toggle}) => {
         toggle(false)
     }
 
+    //keep track of which members are being selected
     const updateSelectedMembers = (memberName, isSelected) => {
         isSelected? setSelectedMembers([...selectedMembers, memberName])
         :

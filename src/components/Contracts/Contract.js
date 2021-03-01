@@ -1,8 +1,10 @@
+//EACH CONTRACT ROW
 import {useState, useEffect} from "react";
 import Button from "../Elements/Button"
 import {Link, useHistory} from "react-router-dom";
 import {serverURL} from "../../config";
 
+//modify status when action is performed
 const modifyStatus = async (creator, candidate, contract, status) => {
     return await fetch(`${serverURL}/modifystatus/`, {
         method: 'POST',
@@ -23,16 +25,19 @@ const Contract = ({content, id, onDelete}) => {
         setStatus(content.status)
     }, [content,id]);
 
+    //edits draft contract
     const editContract = (id) =>{
         history.push({
             pathname: `/editContract/${newContent.candidateName}/${newContent.contractName}`,
             state: { data: newContent.draftContent }
         })
     }
+    //deletes draft contract
     const deleteContract = async (id) => {
         let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 10)
         if(success.success) onDelete(id)
     }
+    //approve contract
     const approveContract = async(isCompany, id) => {
         if(isCompany){
             let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 4)
@@ -42,6 +47,7 @@ const Contract = ({content, id, onDelete}) => {
             if(success.success) setStatus(status+1);
         }
     }
+    //un-approve or cancel approval
     const disapproveContract = async(isCompany, id) => {
         if(isCompany){
             let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 2)        
@@ -52,10 +58,12 @@ const Contract = ({content, id, onDelete}) => {
         }
         
     }
+    //finalize contract if editing feels good
     const finalizeContract = async (id) => {
         let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 1)
         if(success.success) setStatus(status+1);
     }
+    //finally sign the contract
     const signContract = async(isCompany, id) => {
         if(isCompany){
             window.open(`/signcontract?candidate=${newContent.candidateName}&contract=${newContent.contractName}`, "_blank");

@@ -174,5 +174,6 @@ footer hr{
   height: 680px;
 }
 .status-text{
-  border: 2px solid yellow;
+  font-weight: bold;
+  color: crimson;
 }

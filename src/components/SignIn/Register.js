@@ -1,7 +1,9 @@
+// REGISTER USER
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {serverURL} from "../../config";
 
+//function for sending credentials to server
 async function registerUser(credentials) {
   return fetch(`${serverURL}/register`, {
     method: 'POST',
@@ -12,7 +14,6 @@ async function registerUser(credentials) {
   })
     .then(data => data.json())
  }
-
 
 const Register = ({setToken}) => {
   let history = useHistory();
@@ -25,6 +26,7 @@ const Register = ({setToken}) => {
   const [candidate, setCandidate] = useState(true)
   const [company, setCompany] = useState(false)
 
+  // selecting role (ie. teacher or student)
   const onRoleChangeCan = () => {
     if (errorMessage){
       setErrorMessage(null);
@@ -43,7 +45,7 @@ const Register = ({setToken}) => {
   
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    //validation
     if (!userName || !password || !confirmPassword || !companyName) {
       setErrorMessage('Please fill all fields')
       return
@@ -57,6 +59,7 @@ const Register = ({setToken}) => {
       return
     }
 
+    //send credentials to registerUser function
     const token = await registerUser({userName, fullName, password, companyName, candidate})
     if(token.success){
       setToken(token);

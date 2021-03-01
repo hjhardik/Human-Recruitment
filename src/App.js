@@ -1,4 +1,6 @@
+//importing all the elements into the main App
 import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+//import css
 import './App.css';
 import Header from "./components/HeaderFooter/Header";
 import Footer from "./components/HeaderFooter/Footer";
@@ -12,6 +14,7 @@ import EditContract from './components/Viewer/EditContract';
 import SignAuthorize from './components/Viewer/SignAuthorize';
 
 function App() {
+  // token based authentication used for login/signup
   const {token, setToken} = UserToken();
   return (
     <Router>
