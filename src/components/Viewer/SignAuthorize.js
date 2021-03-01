@@ -3,15 +3,18 @@ import {useLocation} from "react-router-dom";
 import Button from "../Elements/Button";
 import {serverURL} from "../../config";
 
-const SignAuthorize = () => {
+const SignAuthorize = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
     // eslint-disable-next-line
     const [content, setContent] = useState("OAUTH IN PROGRESS...");
     const [showEmail, setShowEmail] = useState(true);
     const [email, setEmail]= useState('');
 
-    let {contract, candidate, code, api_access_point, web_access_point} = useLocation();    
+    let {contract, candidate, code, api_access_point, web_access_point} = useLocation();
     console.log(contract, candidate, code, api_access_point, web_access_point);
+    const query = new URLSearchParams(props.location.search);    
+    console.log(query.get('contract'))
+    
     const callFunc = async () => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(! re.test(String(email).toLowerCase())){
