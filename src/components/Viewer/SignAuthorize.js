@@ -30,10 +30,8 @@ const SignAuthorize = () => {
                 },
                 body: JSON.stringify({contract, candidate, email, code, api_access_point, web_access_point})
             });
-            //history.push(redirectUrl);
-            window.location.href = redirectUrl;     
+            history.push(redirectUrl);     
         }else{
-            console.log("not undefined")
         fetch(`${serverURL}/signauth/redirect`, {
             method: 'POST',
             headers: {
