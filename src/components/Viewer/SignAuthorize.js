@@ -55,8 +55,7 @@ const SignAuthorize = (props) => {
             body: JSON.stringify({contract, candidate, email, code, state, api_access_point})
         }).then((data)=>data.json());
         if(res.success){
-            // IF API IS CERTIFIED, UPDATE STATUS OF THE CONTRACT TO 'SIGNED BY COMPANY' and 
-            // GENERATE SIGNING URL AND SEND IT TO CANDIDATE 
+            setContent('Authorization successful. Contract sent.') 
         }else{
             setErrorMessage(res.msg);
         }  

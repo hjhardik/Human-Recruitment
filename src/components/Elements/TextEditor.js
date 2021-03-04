@@ -32,8 +32,12 @@ const TextEditor = forwardRef((props, ref) => {
   //use of useRef to call covertToHTML function
   useImperativeHandle(ref, () => ({
   async convertContentToHTML() {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    return(currentContentAsHTML);
+    if(editorState !== undefined){
+      let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+      return (currentContentAsHTML);
+    }else{
+      return ("")
+    }
   }
 }))
   
