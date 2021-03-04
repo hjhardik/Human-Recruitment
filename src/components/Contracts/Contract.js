@@ -101,7 +101,7 @@ const Contract = ({content, id, onDelete}) => {
                 {(status === 3 || status === 4) && localStorage.getItem('candidate')==="false" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(true, id) }/>}
                 {localStorage.getItem('candidate')==="true" && status===4 && <Button class="tableButton btn btn-outline-warning" text="Waiting for company to send signature link"/>} 
                 {localStorage.getItem('candidate')==="false" && status===4 && <Button class="tableButton btn btn-success" text="SIGN" onClick={()=> signContract(true, id)}/>} 
-                {localStorage.getItem('candidate')==="true" && status===5 && <Link to={newContent.signingUrl}>Click to sign</Link>}
+                {localStorage.getItem('candidate')==="true" && status===5 && <a href={newContent.signingUrl} target="_blank" rel="noopener noreferrer">Click to sign</a>}
                 {localStorage.getItem('candidate')==="false" && status===5 && <Button class="tableButton btn btn-outline-warning" text="Waiting for candidate to sign."/>}
                 {status===6 && <Button class="tableButton btn btn-outline-warning" text="CONTRACT ESTABLISHED SUCCESSFULLY"/>}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-danger" text="Delete" onClick={()=> deleteContract(newContent._id) }/>}
