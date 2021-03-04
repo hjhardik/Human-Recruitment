@@ -24,6 +24,7 @@ const SignAuthorize = (props) => {
     const candidate = params.get('candidate');
     const code = params.get('code');
     const state = params.get('state');
+    const api_access_point = params.get('api_access_point');
 
     const callFunc = async () => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -40,7 +41,7 @@ const SignAuthorize = (props) => {
                     Accept: 'application/json',
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({contract, candidate, email, code, state})
+                body: JSON.stringify({contract, candidate, email, code, state, api_access_point})
             }).then((data)=>data.json());
 
             window.open(redirectUrl.data, "_self");  
@@ -51,7 +52,7 @@ const SignAuthorize = (props) => {
             headers: {
             'Content-Type': 'application/json'
             },
-            body: JSON.stringify({contract, candidate, email, code, state})
+            body: JSON.stringify({contract, candidate, email, code, state, api_access_point})
         }).then((data)=>data.json());
         if(res.success){
             // IF API IS CERTIFIED, UPDATE STATUS OF THE CONTRACT TO 'SIGNED BY COMPANY' and 
