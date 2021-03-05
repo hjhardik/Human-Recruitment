@@ -61,7 +61,6 @@ const SignAuthorize = (props) => {
     }
     
     if(code !== undefined && code !== null){
-        setShowEmail(false);
         callFunc();
     }
 

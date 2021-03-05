@@ -112,14 +112,14 @@ const Contract = ({content, id, onDelete}) => {
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-primary" text="Finalize" onClick={()=> finalizeContract(id)}/>}
                 {localStorage.getItem('candidate')==="true" && status===1 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(false, id)}/>}
                 {localStorage.getItem('candidate')==="false" && status===2 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(true, id)}/>}
-                {(status=== 2 || status === 4 || status===5) && localStorage.getItem('candidate')==="true" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(false, id) }/>}
-                {(status === 3 || status === 4) && (newContent.signingUrl === null) && localStorage.getItem('candidate')==="false" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(true, id) }/>}
                 {localStorage.getItem('candidate')==="true" && status===3 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(false, id)}/>} 
                 {localStorage.getItem('candidate')==="false" && status===4 && <Button class="tableButton btn btn-success" text="SIGN" onClick={()=> signContract(true, id)}/>} 
                 {localStorage.getItem('candidate')==="true" && status===5 && <a href={newContent.signingUrl} target="_blank" rel="noopener noreferrer">Click to sign</a>}
                 {status===6 && <Button class="tableButton btn btn-outline-warning" text="CONTRACT ESTABLISHED SUCCESSFULLY"/>}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-danger" text="Delete" onClick={()=> deleteContract(newContent._id) }/>}
                 {status===6 && <Button text="CONTRACT ESTABLISHED" color="pink" />}
+                {(status=== 2 || status === 4 || status===5) && localStorage.getItem('candidate')==="true" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(false, id) }/>}
+                {(status === 3 || status === 4) && (newContent.signingUrl === null) && localStorage.getItem('candidate')==="false" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(true, id) }/>}
                 </>
             </td>
         </tr>
