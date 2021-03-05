@@ -40,38 +40,50 @@ const Contract = ({content, id, onDelete}) => {
     //approve contract
     const approveContract = async(isCompany, id) => {
         if(isCompany){
-            let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 4)
-            if(success.success) setStatus(4);
+            if(newContent.signingUrl !== undefined && newContent.signingUrl !== null && newContent.signingUrl !== ""){
+                let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 5)
+                if(success.success) setStatus(5);
+            }else{
+                let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 4)
+                if(success.success) setStatus(4);
+            }
         }else{
-            let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, status+1)
-            if(success.success) setStatus(status+1);
+            if(newContent.signingUrl !== undefined && newContent.signingUrl !== null && newContent.signingUrl !== ""){
+                let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 5)
+                if(success.success) setStatus(5);
+            }else{
+                let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 2)
+                if(success.success) setStatus(2);
+            }            
         }
     }
-    //un-approve or cancel approval
+    //cancel approval
     const disapproveContract = async(isCompany, id) => {
         if(isCompany){
             let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 2)        
             if(success.success) setStatus(2);
         }else{
-            let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, status-1)        
-            if(success.success) setStatus(status-1);
+            if(newContent.signingUrl !== undefined && newContent.signingUrl !== null && newContent.signingUrl !== ""){
+                let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 3)        
+                if(success.success) setStatus(3);
+            }else{
+                let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 1)        
+                if(success.success) setStatus(1);
+            }        
         }
-        
     }
     //finalize contract if editing feels good
     const finalizeContract = async (id) => {
         let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 1)
-        if(success.success) setStatus(status+1);
+        if(success.success) setStatus(1);
     }
-    //finally sign the contract
+    //sign the contract
     const signContract = async(isCompany, id) => {
         if(isCompany){
             window.open(`/signcontract?candidate=${newContent.candidateName}&contract=${newContent.contractName}`, "_blank");
         }else{
-            
+
         }
-        // let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, status+1)
-        // if(success.success) setStatus(status+1);
     }
     return (
         <tr>
@@ -91,18 +103,20 @@ const Contract = ({content, id, onDelete}) => {
             </td>       
             <td>
                 <>
+                {localStorage.getItem('candidate')==="false" && status===1 && <Button class="tableButton btn btn-outline-warning" text="Waiting for candidate to approve."/>}
+                {localStorage.getItem('candidate')==="false" && status===3 && <Button class="tableButton btn btn-outline-warning" text="Waiting for candidate to approve."/>}
+                {localStorage.getItem('candidate')==="true" && status===4 && <Button class="tableButton btn btn-outline-warning" text="Waiting for company to send signature link"/>}
+                {localStorage.getItem('candidate')==="true" && status===2 && <Button class="tableButton btn btn-outline-warning" text="Waiting for company to approve."/>}
+                {localStorage.getItem('candidate')==="false" && status===5 && <Button class="tableButton btn btn-outline-warning" text="Waiting for candidate to sign."/>}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-dark" text="Edit" onClick={()=>editContract(id)}/>}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-primary" text="Finalize" onClick={()=> finalizeContract(id)}/>}
                 {localStorage.getItem('candidate')==="true" && status===1 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(false, id)}/>}
-                {localStorage.getItem('candidate')==="false" && status===1 && <Button class="tableButton btn btn-outline-warning" text="Waiting for candidate to approve."/>}
                 {localStorage.getItem('candidate')==="false" && status===2 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(true, id)}/>}
-                {localStorage.getItem('candidate')==="true" && status===2 && <Button class="tableButton btn btn-outline-warning" text="Waiting for company to approve."/>}
-                {(status >= 2 && status <= 5) && localStorage.getItem('candidate')==="true" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(false, id) }/>}
-                {(status === 3 || status === 4) && localStorage.getItem('candidate')==="false" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(true, id) }/>}
-                {localStorage.getItem('candidate')==="true" && status===4 && <Button class="tableButton btn btn-outline-warning" text="Waiting for company to send signature link"/>} 
+                {(status=== 2 || status === 4 || status===5) && localStorage.getItem('candidate')==="true" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(false, id) }/>}
+                {(status === 3 || status === 4) && (newContent.signingUrl === null) && localStorage.getItem('candidate')==="false" && <Button class="tableButton btn btn-outline-danger" text="CANCEL APPROVAL" onClick={()=> disapproveContract(true, id) }/>}
+                {localStorage.getItem('candidate')==="true" && status===3 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(false, id)}/>} 
                 {localStorage.getItem('candidate')==="false" && status===4 && <Button class="tableButton btn btn-success" text="SIGN" onClick={()=> signContract(true, id)}/>} 
                 {localStorage.getItem('candidate')==="true" && status===5 && <a href={newContent.signingUrl} target="_blank" rel="noopener noreferrer">Click to sign</a>}
-                {localStorage.getItem('candidate')==="false" && status===5 && <Button class="tableButton btn btn-outline-warning" text="Waiting for candidate to sign."/>}
                 {status===6 && <Button class="tableButton btn btn-outline-warning" text="CONTRACT ESTABLISHED SUCCESSFULLY"/>}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-danger" text="Delete" onClick={()=> deleteContract(newContent._id) }/>}
                 {status===6 && <Button text="CONTRACT ESTABLISHED" color="pink" />}

@@ -54,7 +54,6 @@ const CreateDraft= ({user, company, addContract, toggle}) => {
             }    
             let draftContent = await childRef.current.convertContentToHTML();
             let res = await fetchFunc({subRoute: "createDraft", sendData: {user, company, contractName, selectedMembers, draftContent}})
-            console.log(res);
             if(res.success){
                 setSelectedMembers([])
                 setContractName('')

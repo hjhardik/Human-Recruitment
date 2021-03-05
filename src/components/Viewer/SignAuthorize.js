@@ -3,8 +3,6 @@
 // and then generates code and access/refresh tokens and then sends the document to be
 // signed through TRANSIENT DOCUMENT and generates an AGREEMENT, which later will be used 
 // to create a signing URL, which will then be sent to the candidate for signing
-// IMPORTANT** : SINCE MY API IS NOT CERTIFIED BY ADOBE, IT RESULTS IN 403 ERROR (ie. NOT ALLOWED)
-// WHILE CREATING AGREEMENT.
 import React,{useState} from 'react';
 import Button from "../Elements/Button";
 import {serverURL} from "../../config";
@@ -61,6 +59,12 @@ const SignAuthorize = (props) => {
         }  
     } 
     }
+    
+    if(code !== undefined && code !== null){
+        setShowEmail(false);
+        callFunc();
+    }
+
     
     return (
         <div className="jumbotron">
