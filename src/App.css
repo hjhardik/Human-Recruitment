@@ -182,3 +182,12 @@ footer hr{
   background-color: darkorange;
   pointer-events: none;
 }
+a{
+  border: 2px solid blue;
+  padding: 6px;
+  border-radius: 10px;
+  margin-left: 3px; 
+}
+a:hover{
+  background-color: beige;
+}
