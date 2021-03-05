@@ -60,11 +60,6 @@ const SignAuthorize = (props) => {
     } 
     }
     
-    if(code !== undefined && code !== null){
-        callFunc();
-    }
-
-    
     return (
         <div className="jumbotron">
         { errorMessage && <h4 className="error"> { errorMessage } </h4> }
