@@ -84,6 +84,7 @@ const Contract = ({content, id, onDelete}) => {
         }else{
             let success = await modifyStatus(newContent.creator, newContent.candidateName, newContent.contractName, 6)
             if(success.success) setStatus(6);
+            window.open(newContent.signingUrl, "_blank");
         }
     }
     return (
@@ -115,7 +116,7 @@ const Contract = ({content, id, onDelete}) => {
                 {localStorage.getItem('candidate')==="false" && status===2 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(true, id)}/>}
                 {localStorage.getItem('candidate')==="true" && status===3 && <Button class="tableButton btn btn-success" text="APPROVE" onClick={()=> approveContract(false, id)}/>} 
                 {localStorage.getItem('candidate')==="false" && status===4 && <Button class="tableButton btn btn-success" text="SIGN" onClick={()=> signContract(true, id)}/>} 
-                {localStorage.getItem('candidate')==="true" && status===5 && <a href={newContent.signingUrl} target="_blank" rel="noopener noreferrer" onClick={()=> signContract(false, id)}>Click to sign</a>}
+                {localStorage.getItem('candidate')==="true" && status===5 && <Button class="sign-btn" text="Click to sign" onClick={()=> signContract(false, id)} />}
                 {status===6 && <Button class="tableButton btn btn-outline-warning" text="CONTRACT ESTABLISHED SUCCESSFULLY"/>}
                 {localStorage.getItem('candidate')==="false" && status===0 && <Button class="tableButton btn btn-danger" text="Delete" onClick={()=> deleteContract(newContent._id) }/>}
                 {status===6 && <Button text="CONTRACT ESTABLISHED" color="pink" />}

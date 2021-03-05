@@ -182,12 +182,12 @@ footer hr{
   background-color: darkorange;
   pointer-events: none;
 }
-a{
+a,.sign-btn{
   border: 2px solid blue;
   padding: 6px;
   border-radius: 10px;
   margin-left: 3px; 
 }
-a:hover{
+a:hover,.sign-btn:hover{
   background-color: beige;
 }
