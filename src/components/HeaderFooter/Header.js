@@ -17,7 +17,7 @@ const Header = ({isAuth, setToken}) => {
             <div className="header-center">
                 Human Recruitment Signing Platform
             </div>
-            {true && <button className="btn btn-light" onClick={handleLogout}>Logout</button>}
+            {isAuth && <button className="btn btn-light" onClick={handleLogout}>Logout</button>}
         </div>
     )
 }
